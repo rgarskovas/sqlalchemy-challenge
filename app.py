@@ -99,9 +99,7 @@ def tobs():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of all passenger names"""
-    # Query all passengers
-    
+   
     # Calculate the date 1 year ago from the last data point in the database
 
     last_date = session.query(measurement.date).order_by(measurement.date.desc()).first()[0]
