@@ -14,7 +14,7 @@ from flask import Flask, jsonify
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("sqlite:///hawaii.sqlite")
+engine = create_engine("sqlite:///Resources/hawaii.sqlite")
 
 # reflect an existing database into a new model
 Base = automap_base()
@@ -42,7 +42,9 @@ def welcome():
         f"Available Routes:<br/>"
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
-        f"/api/v1.0/tobs<br/>"                
+        f"/api/v1.0/tobs<br/>"
+        f"/api/v1.0/<start_date>"
+        f"/api/v1.0/<start_date>/<end_date>"                   
     )
 
 @app.route("/api/v1.0/precipitation/")
@@ -51,7 +53,6 @@ def prcp():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-    """Return a list of all passenger names"""
     # Query all dates and precip
     results = session.query(measurement.date, measurement.prcp).all()
     
@@ -99,7 +100,9 @@ def tobs():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
-   
+    """Return a list of all passenger names"""
+    # Query all passengers
+    
     # Calculate the date 1 year ago from the last data point in the database
 
     last_date = session.query(measurement.date).order_by(measurement.date.desc()).first()[0]
